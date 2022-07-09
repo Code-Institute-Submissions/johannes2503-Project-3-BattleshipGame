@@ -1,6 +1,10 @@
+
 # BattleShip Game
 
+from concurrent.futures.process import _threads_wakeups
+from multiprocessing.sharedctypes import Value
 import random
+from tkinter import E
 
 def build_board(dim):
     return [["." for count in range(dim)] for count in range(dim)]
@@ -27,6 +31,35 @@ def build_ship(dim):
         coords = tuple(zip(row_ship, col_ship))
     return list(coords)
 
+def user_level_choice():
+    true = True
+    while true == True:
+        try:
+            print("Choose your Level between 1-3 (1 = grid of 5  2 = grid of 7 and 3 = grid of 10):")
+            level = int(input("Level:"))
+            level_1 = 5
+            level_2 = 7
+            level_3 = 10
+      
+            if level == 1:
+                print("You chose level 1")
+                return level_1
+            elif level == 2:
+                print("You chose level 2")
+                return level_2
+            elif level == 3:
+                print("You chose level 3")
+                return level_3
+            
+            else: 
+                level != (1,2,3)
+                print("Not valid level!")
+                
+            
+        except ValueError:
+                print("Incorrect input, must be a integer between 1-3")
+
+
 def user_guess():
     row = int(input("Row: ")) -1
     col = int(input("Col ")) -1
@@ -51,6 +84,7 @@ def welcome_message():
 
 def main():
     welcome_message()
+    user_level_choice()
     board = build_board(5)
     ship = build_ship(5)
     guesses = []
@@ -61,6 +95,3 @@ def main():
     return
 
 main()
-        
-
-
