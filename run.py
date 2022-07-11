@@ -5,12 +5,19 @@ import random
 def build_board(levels):
     return [["." for count in range(levels)] for count in range(levels)]
 
-def generate_board(board):
-    for b in board:
+def generate_player_board(player_board):
+    print("Player Board")
+    for b in player_board:
+       print(*b)
+    
+
+def generate_computer_board(computer_board):
+    print("Computer Board")
+    for b in computer_board:
         print(*b)
 
 
-def build_ship(levels):
+def build_player_ship(levels):
 
     len_ship = random.randint(2, levels)
     orientation = random.randint(0, 1)
@@ -24,8 +31,28 @@ def build_ship(levels):
         col_ship = [random.randint(0, levels - 1)] * len_ship
         row = random.randint(0, levels - len_ship)
         row_ship = list(range(row, row + len_ship))
-        coords = tuple(zip(row_ship, col_ship))
+        coords = tuple(zip(row_ship, col_ship))   
     return list(coords)
+
+def build_computer_ship(levels):
+
+    comp_len_ship = random.randint(2, levels)
+    comp_orientation = random.randint(0, 1)
+
+    if comp_orientation == 0:
+        comp_row_ship = [random.randint(0, levels - 1) * comp_len_ship]
+        comp_col = random.randint(0, levels - comp_len_ship)
+        comp_col_ship = list(range(comp_col, comp_col + comp_len_ship))
+        computer_coords = tuple(zip(comp_row_ship, comp_col_ship))
+        print(computer_coords)
+    else:
+        comp_col_ship = [random.randint(0, levels - 1)] * comp_len_ship
+        row = random.randint(0, levels - comp_len_ship)
+        row_ship = list(range(row, row + comp_len_ship))
+        computer_coords = tuple(zip(row_ship, comp_col_ship))
+        print(computer_coords)
+    return list(computer_coords)
+ 
 
 
 def user_level_choice():
@@ -54,21 +81,43 @@ def user_level_choice():
 
 def user_guess():
     row = int(input("Row: ")) -1
-    col = int(input("Col ")) -1
+    col = int(input("Col: ")) -1
+    print(row, col)
     return (row, col)
 
-def update_board(guess, board, ship, guesses):
-    if guess in guesses:
+def computer_guess(levels):
+    comp_row = random.randint(0, levels) -1
+    comp_col = random.randint(0, levels) -1
+    print(comp_row, comp_col)
+    return (comp_row, comp_col)
+
+def update_player_board(player_guess, player_board, player_ship, player_guesses):
+    if player_guess in player_guesses:
         print("You have already guessed that, guess again!")
-        return board
-    guesses.append(guess)
-    if guess in ship:
+        return player_board
+    player_guesses.append(player_guess)
+    if player_guess in player_ship:
         print("You shot my battleship")
-        board[guess[0]][guess[1]] = "X"
-        ship.remove(guess)
-        return board
+        player_board[player_guess[0]][player_guess[1]] = "X"
+        player_ship.remove(player_guess)
+        return player_board
     print("You missed!")
-    return board
+    player_board[player_guess[0]][player_guess[1]] = "$"
+    return player_board
+
+def update_computer_board(computer_guess, computer_board, computer_ship, computer_guesses):
+    if computer_guess in computer_guesses:
+        print("You have already guessed that, guess again!")
+        return computer_board
+    computer_guesses.append(computer_guess)
+    if computer_guess in computer_ship:
+        print("You shot the computers battleship")
+        computer_board[computer_guess[0]][computer_guess[1]] = "X"
+        computer_ship.remove(computer_guess)
+        return computer_board
+    print("You missed hiahh!")
+    computer_board[computer_guess[0]][computer_guess[1]] = "@"
+    return computer_board
 
 def welcome_message():
     print("XXXXXXXXXXXXXXXXXXXXXXXXXX")
@@ -87,14 +136,23 @@ def welcome_message():
 def main():
     welcome_message()
     levels = user_level_choice()
-    board = build_board(levels)
-    ship = build_ship(levels)
-    guesses = []
-    while len(ship) > 0:
-        board = update_board(user_guess(), board, ship, guesses)
-        generate_board(board)
+    player_board = build_board(levels)
+    computer_board = build_board(levels)
+    player_ship = build_player_ship(levels)
+    computer_ship = build_computer_ship(levels)
+    player_guesses = []
+    computer_guesses = []
+    generate_player_board(player_board)
+    generate_computer_board(computer_board)
+    while len(player_ship) > 0:
+        player_board = update_player_board(user_guess(), player_board, player_ship, player_guesses)
+        generate_player_board(player_board)
     print('You sunk my battleship!')
-    return
+
+    while len(computer_ship) > 0:
+        computer_board = update_computer_board(computer_guess(), computer_board, computer_ship, computer_guesses)
+        generate_computer_board(computer_board)
+    print('TEST')
    
 main()
         
