@@ -32,19 +32,18 @@ def user_level_choice():
     true = True
     while true == True:
         try:
-            print("Choose your Level between 1-3 (1 = grid of 5  2 = grid of 7 and 3 = grid of 10):")
-            level = int(input("Level:"))
+            level = int(input("Level: "))
             if level == 1:
                 print("You chose level 1")
                 levels = level * 5
                 return levels
             elif level == 2:
                 print("You chose level 2")
-                levels = level * 3
+                levels = level * 4
                 return levels
             elif level == 3:
                 print("You chose level 3")
-                levels = level * 3
+                levels = level * 4
                 return levels
             else: 
                 level != (1,2,3)
@@ -64,7 +63,7 @@ def update_board(guess, board, ship, guesses):
         return board
     guesses.append(guess)
     if guess in ship:
-        print("You srhot my battleship")
+        print("You shot my battleship")
         board[guess[0]][guess[1]] = "X"
         ship.remove(guess)
         return board
@@ -72,9 +71,17 @@ def update_board(guess, board, ship, guesses):
     return board
 
 def welcome_message():
-    print('Welcome to Battleship!')
-    print('There is a battleship hidden in this board. Enter your row and column guesses to sink it!')
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXX")
+    print("X                        X")
+    print("X                        X")
+    print("X Welcome to Battleship! X")
+    print("X                        X")
+    print("X                        X")
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXX\n")
 
+    print('There is a battleship hidden on this board.\nFirst choose your level then enter your row and column guesses to sink it!\n')
+
+    print("Choose your Level between 1-3 (1 = grid of 5  2 = grid of 8 and 3 = grid of 12):")
 
 
 def main():
