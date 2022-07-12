@@ -5,13 +5,13 @@ import random
 def build_board(levels):
     return [["." for count in range(levels)] for count in range(levels)]
 
-def generate_player_board(player_board):
+def generate_computer_board(player_board):
     print("Player Board")
     for b in player_board:
        print(*b)
     
 
-def generate_computer_board(computer_board):
+def generate_player_board(computer_board):
     print("Computer Board")
     for b in computer_board:
         print(*b)
@@ -50,14 +50,14 @@ def build_computer_ship(levels):
         row = random.randint(0, levels - comp_len_ship)
         row_ship = list(range(row, row + comp_len_ship))
         computer_coords = tuple(zip(row_ship, comp_col_ship))
-        print(computer_coords)
+        
     return list(computer_coords)
  
 
 
 def user_level_choice():
-    true = True
-    while true == True:
+    
+    while True:
         try:
             level = int(input("Level: "))
             if level == 1:
@@ -77,7 +77,7 @@ def user_level_choice():
                 print("Not valid level!")  
 
         except ValueError:
-                print("Incorrect input, must be a integer between 1-3")
+                print("Incorrect input, must be a number between 1-3")
 
 def user_guess(levels):
     while True:
@@ -90,7 +90,7 @@ def user_guess(levels):
                 print(f"Incorrect input, must be between 1 and {levels}")
 
         except ValueError:
-                    print(f"Incorrect input, must be a integer between 1 and {levels}")
+                    print(f"Incorrect input, must be a number between 1 and {levels}")
     
 
         
@@ -101,21 +101,21 @@ def computer_guess(levels):
     
     return (comp_row, comp_col)
 
-def update_player_board(player_guess, player_board, player_ship, player_guesses):
+def update_computer_board(player_guess, player_board, player_ship, player_guesses):
     if player_guess in player_guesses:
-        print("You have already guessed that, guess again!")
+        print(" have already guessed that, guess again!")
         return player_board
     player_guesses.append(player_guess)
     if player_guess in player_ship:
-        print("You shot my battleship")
+        print("you shot my battleship")
         player_board[player_guess[0]][player_guess[1]] = "X"
         player_ship.remove(player_guess)
         return player_board
-    print("You missed!")
+    print("The computer missed!")
     player_board[player_guess[0]][player_guess[1]] = "$"
     return player_board
 
-def update_computer_board(computer_guess, computer_board, computer_ship, computer_guesses):
+def update_player_board(computer_guess, computer_board, computer_ship, computer_guesses):
     if computer_guess in computer_guesses:
         print("You have already guessed that, guess again!")
         return computer_board
@@ -138,8 +138,12 @@ def welcome_message():
     print("X                        X")
     print("XXXXXXXXXXXXXXXXXXXXXXXXXX\n")
 
-    print('There is a battleship hidden on this board.\nFirst choose your level then enter your row and column guesses to sink it!\n')
-
+    name = input("What is your name: ")
+    print("\n")
+    print(f"Hello {name}, there is a battleship hidden on this board.")
+    print("\n")
+    print("First choose your level then enter your row and column guesses to try and sink it!")
+    print("\n")
     print("Choose your Level between 1-3 (1 = grid of 5  2 = grid of 8 and 3 = grid of 12):")
 
 
