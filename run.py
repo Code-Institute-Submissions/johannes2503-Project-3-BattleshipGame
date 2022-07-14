@@ -98,14 +98,17 @@ def user_guess(levels):
         try:
             row = int(input("Row: ")) - 1
             col = int(input("Col: ")) - 1
+            if row < 0 and col < 0:
+                print("Input not a positive number, try again!")
+                continue
             if row < levels and col < levels:
-                return (row, col)
+                    return (row, col)
             else:
-                print(f"Incorrect input, must be between 1 and {levels}")
-
+                print(f"Incorrect input, must be between 1 and {levels}") 
         except ValueError:
             print("Incorrect input, ")
             print(f"must be a number between 1 and {levels}")
+
 # Function to generate the computers choices
 
 
@@ -199,7 +202,7 @@ def main():
     generate_player_board(player_board)
     generate_computer_board(computer_board)
     while len(player_ship) > 0 and len(computer_ship) > 0:
-        if round > 14:
+        if round > 4:
             print("Game Over no one won...")
             try_again()
         else:
@@ -213,5 +216,6 @@ def main():
     try_again()
 
 # Calling the main function
+
 
 main()
