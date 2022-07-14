@@ -104,7 +104,7 @@ def user_guess(levels):
             if row < levels and col < levels:
                     return (row, col)
             else:
-                print(f"Incorrect input, must be between 1 and {levels}") 
+                print(f"Incorrect input, must be between 1 and {levels}")
         except ValueError:
             print("Incorrect input, ")
             print(f"must be a number between 1 and {levels}")
@@ -120,7 +120,10 @@ def computer_guess(levels):
 # Function to update the computers board with results of player choices
 
 
-def update_computer_board(player_guess, player_board, player_ship, player_guesses):
+def update_computer_board(player_guess,
+                          player_board,
+                          player_ship,
+                          player_guesses):
     if player_guess in player_guesses:
         return player_board
     player_guesses.append(player_guess)
@@ -136,7 +139,10 @@ def update_computer_board(player_guess, player_board, player_ship, player_guesse
 # Function to update the players boardd with computer random generated choices
 
 
-def update_player_board(computer_guess, computer_board, computer_ship, computer_guesses):
+def update_player_board(computer_guess,
+                        computer_board,
+                        computer_ship,
+                        computer_guesses):
     if computer_guess in computer_guesses:
         print("You have already guessed that, guess again!")
         return computer_board
@@ -162,33 +168,32 @@ def welcome_message():
     print("X                        X")
     print("XXXXXXXXXXXXXXXXXXXXXXXXXX\n")
 
-    test = True
-    while test == True:
+    while True:
         name = input("What is your name: ")
         if name.isnumeric():
-            print("Input must be letters, try again!") 
+            print("Input must be letters, try again!")
         else:
             test = False
             break
     print("\n")
-    print(f"Hello {name}, there is a battleship hidden on the computers board.")
+    print(f"Hello {name}, there is a battleship"
+          "hidden on the computers board.")
     print("\n")
-    print("First choose your level then enter your row and column guesses to try and sink it!")
+    print("First choose your level then enter your row and column"
+          " guesses to try and sink it!")
     print("\n")
-    print("Choose your Level between 1-3 (1 = grid of 5  2 = grid of 8 and 3 = grid of 12):")
+    print("Choose your Level between 1-3"
+          "(1 = grid of 5  2 = grid of 8 and 3 = grid of 12):")
 
 # Function to let the player try again or quit the game
 
 
 def try_again():
-    play_again = True
-    while play_again == True:
+    while True:
         try_again = input("Try again? y/n: ")
         if try_again == "y":
-            play_again = False
             main()
         elif try_again == "n":
-            play_again = False
             exit()
         else:
             print("You must enter y or n!")
@@ -215,9 +220,15 @@ def main():
         else:
             round += 1
             print(f"Round: {round}")
-        player_board = update_player_board(user_guess(levels), player_board, player_ship, player_guesses)
+        player_board = update_player_board(user_guess(levels),
+                                           player_board,
+                                           player_ship,
+                                           player_guesses)
         generate_player_board(player_board)
-        computer_board = update_computer_board(computer_guess(levels), computer_board, computer_ship, computer_guesses)
+        computer_board = update_computer_board(computer_guess(levels),
+                                               computer_board,
+                                               computer_ship,
+                                               computer_guesses)
         generate_computer_board(computer_board)
     print("You Won!")
     try_again()
