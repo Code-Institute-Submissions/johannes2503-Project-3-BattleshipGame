@@ -1,5 +1,6 @@
 # BattleShip Game
 
+from pickle import FALSE
 import random
 
 # Function to build layout of boards
@@ -94,7 +95,7 @@ def user_guess(levels):
         try:
             row = int(input("Row: ")) -1
             col = int(input("Col: ")) -1
-            if row < levels or col < levels:
+            if row < levels and col < levels:
                 return (row, col)
                 
             else:
@@ -114,7 +115,6 @@ def computer_guess(levels):
 
 def update_computer_board(player_guess, player_board, player_ship, player_guesses):
     if player_guess in player_guesses:
-        print("You have already guessed that, guess again!")
         return player_board
     player_guesses.append(player_guess)
     if player_guess in player_ship:
@@ -161,6 +161,26 @@ def welcome_message():
     print("\n")
     print("Choose your Level between 1-3 (1 = grid of 5  2 = grid of 8 and 3 = grid of 12):")
 
+# Function to let the player try again
+
+def try_again():
+    play_again = True
+    while play_again == True:
+        try_again = input("Try again? y/n: ")
+        if try_again == "y":
+            play_again = False
+            start_game_again()
+        elif try_again == "n":
+            play_again = False
+            exit()
+        else:
+            print("You must enter y or n!")
+
+# Function to start the game again
+
+def start_game_again():
+    main()
+
 # Main function to play the game
 
 def main():
@@ -176,10 +196,9 @@ def main():
     generate_player_board(player_board)
     generate_computer_board(computer_board)
     while len(player_ship) > 0 and len(computer_ship) > 0:
-        if round > 19:
+        if round > 1:
             print("Game Over no one won...")
-            try_again = input("Try again? y/n: ")
-            return try_again
+            try_again()
         else:
             round += 1
             print(f"Round: {round}")
@@ -189,6 +208,7 @@ def main():
         generate_computer_board(computer_board)
         
     print("You Won!")
+    try_again()
 
 # Calling the main function 
 
