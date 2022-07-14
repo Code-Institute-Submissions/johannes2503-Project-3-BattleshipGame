@@ -1,32 +1,35 @@
 # BattleShip Game
 
-from pickle import FALSE
 import random
 
 # Function to build layout of boards
+
 
 def build_board(levels):
     return [["." for count in range(levels)] for count in range(levels)]
 
 # Function to generate the computers board
 
+
 def generate_computer_board(player_board):
     print("Player Board")
     for b in player_board:
-       print(*b)
-    
+        print(*b)
+
 # Function to generate the players board
+
 
 def generate_player_board(computer_board):
     print("Computer Board")
     for b in computer_board:
         print(*b)
 
-# Function to generate the players ships 
+# Function to generate the players ships
+
 
 def build_player_ship(levels):
 
-    len_ship = random.randint(2, levels)
+    len_ship = random.randint(2, 4)
     orientation = random.randint(0, 1)
 
     if orientation == 0:
@@ -38,14 +41,15 @@ def build_player_ship(levels):
         col_ship = [random.randint(0, levels - 1)] * len_ship
         row = random.randint(0, levels - len_ship)
         row_ship = list(range(row, row + len_ship))
-        coords = tuple(zip(row_ship, col_ship))   
+        coords = tuple(zip(row_ship, col_ship))
     return list(coords)
 
-# Function to generate the computers ships 
+# Function to generate the computers ships
+
 
 def build_computer_ship(levels):
 
-    comp_len_ship = random.randint(2, levels)
+    comp_len_ship = random.randint(2, 4)
     comp_orientation = random.randint(0, 1)
 
     if comp_orientation == 0:
@@ -53,19 +57,17 @@ def build_computer_ship(levels):
         comp_col = random.randint(0, levels - comp_len_ship)
         comp_col_ship = list(range(comp_col, comp_col + comp_len_ship))
         computer_coords = tuple(zip(comp_row_ship, comp_col_ship))
-        
     else:
         comp_col_ship = [random.randint(0, levels - 1)] * comp_len_ship
         row = random.randint(0, levels - comp_len_ship)
         row_ship = list(range(row, row + comp_len_ship))
         computer_coords = tuple(zip(row_ship, comp_col_ship))
-        
     return list(computer_coords)
 
 # Function to get players level choice
 
+
 def user_level_choice():
-    
     while True:
         try:
             level = int(input("Level: "))
@@ -81,37 +83,39 @@ def user_level_choice():
                 print("You chose level 3")
                 levels = level * 4
                 return levels
-            else: 
-                level != (1,2,3)
-                print("Not valid level!")  
+            else:
+                level != (1, 2, 3)
+                print("Not valid level!")
 
         except ValueError:
                 print("Incorrect input, must be a number between 1-3")
 
 # Function to get players row and column guesses
 
+
 def user_guess(levels):
     while True:
         try:
-            row = int(input("Row: ")) -1
-            col = int(input("Col: ")) -1
+            row = int(input("Row: ")) - 1
+            col = int(input("Col: ")) - 1
             if row < levels and col < levels:
                 return (row, col)
-                
             else:
                 print(f"Incorrect input, must be between 1 and {levels}")
 
         except ValueError:
-                    print(f"Incorrect input, must be a number between 1 and {levels}")
-
+            print("Incorrect input, ")
+            print(f"must be a number between 1 and {levels}")
 # Function to generate the computers choices
 
+
 def computer_guess(levels):
-    comp_row = random.randint(0, levels) -1
-    comp_col = random.randint(0, levels) -1
+    comp_row = random.randint(0, levels) - 1
+    comp_col = random.randint(0, levels) - 1
     return (comp_row, comp_col)
 
 # Function to update the computers board with results of player choices
+
 
 def update_computer_board(player_guess, player_board, player_ship, player_guesses):
     if player_guess in player_guesses:
@@ -128,6 +132,7 @@ def update_computer_board(player_guess, player_board, player_ship, player_guesse
 
 # Function to update the players boardd with computer random generated choices
 
+
 def update_player_board(computer_guess, computer_board, computer_ship, computer_guesses):
     if computer_guess in computer_guesses:
         print("You have already guessed that, guess again!")
@@ -143,6 +148,7 @@ def update_player_board(computer_guess, computer_board, computer_ship, computer_
     return computer_board
 
 # Function with welcome message and start of the game
+
 
 def welcome_message():
     print("XXXXXXXXXXXXXXXXXXXXXXXXXX")
@@ -161,7 +167,8 @@ def welcome_message():
     print("\n")
     print("Choose your Level between 1-3 (1 = grid of 5  2 = grid of 8 and 3 = grid of 12):")
 
-# Function to let the player try again
+# Function to let the player try again or quit the game
+
 
 def try_again():
     play_again = True
@@ -169,17 +176,13 @@ def try_again():
         try_again = input("Try again? y/n: ")
         if try_again == "y":
             play_again = False
-            start_game_again()
+            main()
         elif try_again == "n":
             play_again = False
             exit()
         else:
             print("You must enter y or n!")
 
-# Function to start the game again
-
-def start_game_again():
-    main()
 
 # Main function to play the game
 
@@ -206,13 +209,9 @@ def main():
         generate_player_board(player_board)
         computer_board = update_computer_board(computer_guess(levels), computer_board, computer_ship, computer_guesses)
         generate_computer_board(computer_board)
-        
     print("You Won!")
     try_again()
 
-# Calling the main function 
+# Calling the main function
 
 main()
-        
-
-
