@@ -196,7 +196,7 @@ def main():
     generate_player_board(player_board)
     generate_computer_board(computer_board)
     while len(player_ship) > 0 and len(computer_ship) > 0:
-        if round > 1:
+        if round > 14:
             print("Game Over no one won...")
             try_again()
         else:
