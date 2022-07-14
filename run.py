@@ -162,9 +162,16 @@ def welcome_message():
     print("X                        X")
     print("XXXXXXXXXXXXXXXXXXXXXXXXXX\n")
 
-    name = input("What is your name: ")
+    test = True
+    while test == True:
+        name = input("What is your name: ")
+        if name.isnumeric():
+            print("Input must be letters, try again!") 
+        else:
+            test = False
+            break
     print("\n")
-    print(f"Hello {name}, there is a battleship hidden on this board.")
+    print(f"Hello {name}, there is a battleship hidden on the computers board.")
     print("\n")
     print("First choose your level then enter your row and column guesses to try and sink it!")
     print("\n")
@@ -203,7 +210,7 @@ def main():
     generate_computer_board(computer_board)
     while len(player_ship) > 0 and len(computer_ship) > 0:
         if round > 4:
-            print("Game Over no one won...")
+            print("Game Over the computer Won...")
             try_again()
         else:
             round += 1
@@ -216,6 +223,5 @@ def main():
     try_again()
 
 # Calling the main function
-
 
 main()
