@@ -1,33 +1,38 @@
-# BattleShip Game
+"""
+BattleShip Game
+The objective is to guess where the computers ship is hiding
+on the board and sink it!
+"""
 
 import random
 
-# Function to build layout of boards
-
 
 def build_board(levels):
+    """ Function to build layout of boards """
     return [["." for count in range(levels)] for count in range(levels)]
-
-# Function to generate the computers board
 
 
 def generate_computer_board(player_board):
+
+    """ Function to generate the computers board """
+
     print("Player Board")
     for b in player_board:
         print(*b)
 
-# Function to generate the players board
-
 
 def generate_player_board(computer_board):
+
+    """ Function to generate the players board """
+
     print("Computer Board")
     for b in computer_board:
         print(*b)
 
-# Function to generate the players ships
-
 
 def build_player_ship(levels):
+
+    """ Function to generate the players ships """
 
     len_ship = random.randint(2, 4)
     orientation = random.randint(0, 1)
@@ -44,10 +49,10 @@ def build_player_ship(levels):
         coords = tuple(zip(row_ship, col_ship))
     return list(coords)
 
-# Function to generate the computers ships
-
 
 def build_computer_ship(levels):
+
+    """ Function to generate the computers ships """
 
     comp_len_ship = random.randint(2, 4)
     comp_orientation = random.randint(0, 1)
@@ -64,10 +69,11 @@ def build_computer_ship(levels):
         computer_coords = tuple(zip(row_ship, comp_col_ship))
     return list(computer_coords)
 
-# Function to get players level choice
-
 
 def user_level_choice():
+
+    """ Function to get players level choice """
+
     while True:
         try:
             level = int(input("Level: "))
@@ -84,16 +90,16 @@ def user_level_choice():
                 levels = level * 4
                 return levels
             else:
-                level != (1, 2, 3)
                 print("Not valid level!")
 
         except ValueError:
-                print("Incorrect input, must be a number between 1-3")
-
-# Function to get players row and column guesses
+            print("Incorrect input, must be a number between 1-3")
 
 
 def user_guess(levels):
+
+    """Function to get players row and column guesses"""
+
     while True:
         try:
             row = int(input("Row: ")) - 1
@@ -102,28 +108,32 @@ def user_guess(levels):
                 print("Input not a positive number, try again!")
                 continue
             if row < levels and col < levels:
-                    return (row, col)
+                return (row, col)
             else:
                 print(f"Incorrect input, must be between 1 and {levels}")
         except ValueError:
             print("Incorrect input, ")
             print(f"must be a number between 1 and {levels}")
 
-# Function to generate the computers choices
-
 
 def computer_guess(levels):
+
+    """ Function to generate the computers choices """
+
     comp_row = random.randint(0, levels) - 1
     comp_col = random.randint(0, levels) - 1
     return (comp_row, comp_col)
-
-# Function to update the computers board with results of player choices
 
 
 def update_computer_board(player_guess,
                           player_board,
                           player_ship,
                           player_guesses):
+
+    """ Function to update the computers board with
+        results of player choices
+    """
+
     if player_guess in player_guesses:
         return player_board
     player_guesses.append(player_guess)
@@ -136,13 +146,16 @@ def update_computer_board(player_guess,
     player_board[player_guess[0]][player_guess[1]] = "$"
     return player_board
 
-# Function to update the players boardd with computer random generated choices
-
 
 def update_player_board(computer_guess,
                         computer_board,
                         computer_ship,
                         computer_guesses):
+
+    """ Function to update the players boardd with
+        computer random generated choices
+    """
+
     if computer_guess in computer_guesses:
         print("You have already guessed that, guess again!")
         return computer_board
@@ -156,10 +169,11 @@ def update_player_board(computer_guess,
     computer_board[computer_guess[0]][computer_guess[1]] = "@"
     return computer_board
 
-# Function with welcome message and start of the game
-
 
 def welcome_message():
+
+    """ Function with welcome message and start of the game """
+
     print("XXXXXXXXXXXXXXXXXXXXXXXXXX")
     print("X                        X")
     print("X                        X")
@@ -173,35 +187,37 @@ def welcome_message():
         if name.isnumeric():
             print("Input must be letters, try again!")
         else:
-            test = False
             break
     print("\n")
     print(f"Hello {name}, there is a battleship"
           "hidden on the computers board.")
     print("\n")
-    print("First choose your level then enter your row and column"
-          " guesses to try and sink it!")
+    print("First choose your level then enter your row and column guesses")
+    print("to try and sink it!")
     print("\n")
-    print("Choose your Level between 1-3"
-          "(1 = grid of 5  2 = grid of 8 and 3 = grid of 12):")
-
-# Function to let the player try again or quit the game
+    print("Choose your Level between 1-3 (1 = grid of 5x5 2 = grid of 8x8 ")
+    print("and 3 = grid of 12x12):")
+    print("\n")
 
 
 def try_again():
+
+    """ Function to let the player try again or quit the game """
+
     while True:
-        try_again = input("Try again? y/n: ")
-        if try_again == "y":
+        try_check = input("Try again? y/n: ")
+        if try_check == "y":
             main()
-        elif try_again == "n":
+        elif try_check == "n":
             exit()
         else:
             print("You must enter y or n!")
 
 
-# Main function to play the game
-
 def main():
+
+    """ Main function to play the game """
+
     round = 0
     welcome_message()
     levels = user_level_choice()
@@ -234,5 +250,6 @@ def main():
     try_again()
 
 # Calling the main function
+
 
 main()
