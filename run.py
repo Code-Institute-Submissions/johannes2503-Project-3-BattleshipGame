@@ -107,7 +107,7 @@ def user_guess(levels):
             if row < 0 or col < 0:
                 print("Input not a positive number, try again!")
                 continue
-            elif row < levels or col < levels:
+            elif row < levels and col < levels:
                 return (row, col)
             else:
                 print(f"Incorrect input, must be between 1 and {levels}")
