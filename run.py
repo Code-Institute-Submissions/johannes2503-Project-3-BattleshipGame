@@ -138,7 +138,7 @@ def update_computer_board(player_guess,
         return player_board
     player_guesses.append(player_guess)
     if player_guess in player_ship:
-        print("computer hit my battleship")
+        print("The computer hit your battleship")
         player_board[player_guess[0]][player_guess[1]] = "X"
         player_ship.remove(player_guess)
         return player_board

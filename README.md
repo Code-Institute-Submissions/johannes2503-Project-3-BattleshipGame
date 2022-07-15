@@ -10,19 +10,20 @@ It is built using Python and runs through the Code institute mock terminal on
 * [**User Experience**](#user-experience)
   * [Flowchart](#flowchart)
 * [**Existing Features**](#existing-features)
-  * [User Name Input](#user-name-input)
+  * [Initial gameplay](#initial-gameplay)
+  * [Player Name Input](#player-name-input)
   * [Difficulty Selection](#difficulty-selection)
-  * [Dynamic Attempts](#dynamic-attempts)
-  * [Word Prompt](#word-prompt)
-  * [Dynamic Hangman Image](#dynamic-hangman-image)
-  * [Win/Loss Tracker](#winloss-tracker)
+  * [Dynamic Gameplay](#dynamic-gameplay)
+  * [Guess Prompt](#guess-prompt)
+  * [Wrong entry sample](#wrong-entry-sample)
+  * [End of rounds gameplay](#end-of-rounds-gameplay)
 * [**Desired Features**](#desired-features)
 * [**Technologies Used**](#technologies-used)
 * [**Testing and Quality Control**](#testing-and-quality-control)
   * [Device and Browser Testing](#device-and-browser-testing)
 * [**Bugs**](#bugs)
 * [**Deployment**](#deployemnt)
-  * [Cloning a Project](#cloning-a-project)
+  * [Cloning the repository](#cloning-the-repository)
 * [**Credits**](#credits)
   * [Content](#content)
 * [**Acknowledments**](#acknowledgements)
@@ -49,12 +50,13 @@ If the player or computer do not sink the battleship in 5 rounds the game is ove
 
 # Existing Features
 
-## Inital gameplay
+## Initial Gameplay
 
 This is the sceen you are presented with at the beginning of the game.
 
 ![Initial gameplay](assets/readme_images/Initial_gameplay.png)
 
+[Back to top](<#contents>)
 
 ## Player Name Input
 The player is prompted, during the initial loop of the game, to input a name. The name is checked to ensure it is containing only letters and does not contain numbers. If the player inputs an invalid name, the program prompts them to enter again. If the player inputs a valid name, the input is stored as the name variable.
@@ -62,16 +64,19 @@ The uname variable is used to add a personal touch to the game experience for th
 
 ![Name entered](assets/readme_images/name_entered.png)
 
+[Back to top](<#contents>)
 
 ## Difficulty Selection
 The player is prompted to choose a difficulty level between 1-3. 1 being a board of 5x5, 2 - 8x8 and 3 - 12x12. If the player enters anything other then a letter between 1-3 he is prompted with an error and asked to enter again. If the input is valid the boards for the player and computer are generated with a ship hidden on the boards.
 
+[Back to top](<#contents>)
 
 ## Dynamic Gameplay
 Once the user selects a difficulty, the program then sets the number of rounds the player and computer get for guessing the location of the ship and generates the boards with a hidden ship.
 
 ![Level chosen](assets/readme_images/level_chosen.png)
 
+[Back to top](<#contents>)
 
 ## Guess Prompt
 
@@ -79,11 +84,15 @@ Now the player is prompted with a input for row and column. The input is validat
 
 ![Gameplay](assets/readme_images/gameplay.png)
 
+[Back to top](<#contents>)
+
 ## Wrong entry sample
 
 Here is an example of a invalid entery from the player in the row prompt, the program prompts the player with an error and askes him to enter again.
 
 ![Wrong entery](assets/readme_images/wrong_entery.png)
+
+[Back to top](<#contents>)
 
 ## End of rounds gameplay
 
